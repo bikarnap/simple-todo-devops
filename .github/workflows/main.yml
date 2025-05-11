@@ -16,4 +16,4 @@ jobs:
         node-version: '16'
     - run: npm install
     - run: npm run start &
-    - run: curl --retry 5 --retry-delay 3 http://localhost:3000/api
+    - run: curl --retry 5 --retry-delay 3 http://localhost:3000/health
