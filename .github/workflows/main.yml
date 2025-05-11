@@ -1,0 +1,19 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [main]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/checkout@v2
+      with:
+        node-version: '16'
+    - run: npm install
+    - run: npm run start &
+    - run: curl --retry 5 --retry-delay 3 http://localhost:3000/api

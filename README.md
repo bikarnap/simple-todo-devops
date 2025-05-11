@@ -1,1 +1,1 @@
-# wimple-todo-devops
+# simple-todo-devops
