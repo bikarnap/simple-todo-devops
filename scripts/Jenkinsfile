@@ -1,0 +1,11 @@
+pipeline {
+    agent { label: 'generi' }
+
+    stages {
+        stage {
+            steps {
+                sh `date`
+            }
+        }
+    }
+}
