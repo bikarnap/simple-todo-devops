@@ -32,5 +32,5 @@ app.delete('/todos/:index', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Todo app listening on http://localhsot:${PORT}`);
+    console.log(`Todo app listening on http://localhost:${PORT}`);
 });
