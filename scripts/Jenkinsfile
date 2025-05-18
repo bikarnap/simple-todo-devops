@@ -1,0 +1,39 @@
+pipeline {
+    agent { label 'generic' }
+
+    parameters {
+         string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Git branch to use in the pipeline.')
+    }
+
+    stages {
+        // stage('Install node.js') {
+        //     steps {
+        //         sh 'curl "https://nodejs.org/dist/latest/$(curl -s https://nodejs.org/dist/latest/ | grep "pkg" | cut -d'"' -f 2)" -o "$HOME/Downloads/node-latest.pkg" && sudo installer -store -pkg "$HOME/Downloads/node-latest.pkg" -target "/"'
+        //     }
+        // }
+
+        stage('List') {
+            steps {
+                sh 'ls -la'
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run app') {
+            steps {
+                sh 'npm start &'
+            }
+        }
+
+        stage('Health check') {
+            steps {
+                sh 'curl --retry 5 --retry-delay 2 --retry-connrefused http://localhost:3000/health'
+            }
+        }
+    }
+}
