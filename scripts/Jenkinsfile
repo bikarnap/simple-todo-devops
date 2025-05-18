@@ -6,9 +6,27 @@ pipeline {
     }
 
     stages {
-        stage('Show Date') {
+        stage('Install Node.js') {
             steps {
-                sh 'date'
+                sh 'curl "https://nodejs.org/dist/latest/$(curl -s https://nodejs.org/dist/latest/ | grep "pkg" | cut -d'"' -f 2)" -o "$HOME/Downloads/node-latest.pkg" && sudo installer -store -pkg "$HOME/Downloads/node-latest.pkg" -target "/"'
+            }
+        }
+
+        stage('Install dependencies') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('Run app') {
+            steps {
+                sh 'npm start'
+            }
+        }
+
+        stage('Health check') {
+            steps {
+                sh 'curl --retry 5 --retry-delay 3 -f http://localhost:3000/health'
             }
         }
     }
