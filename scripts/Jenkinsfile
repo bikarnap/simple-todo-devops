@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage {
+        stage('Show Date') {
             steps {
                 sh 'date'
             }
