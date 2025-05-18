@@ -1,6 +1,10 @@
 pipeline {
     agent { label: 'generi' }
 
+    parameters {
+         string(name: 'GIT_BRANCH', defaultValue: 'main', description: 'Git branch to use in the pipeline.')
+    }
+
     stages {
         stage {
             steps {
